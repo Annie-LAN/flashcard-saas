@@ -49,7 +49,7 @@ export default function Flashcard() {
                   <Box
                     sx={
                       {
-                        /* Styling for flip animation */
+                        /* TODO: Styling for flip animation */
                       }
                     }
                   >
