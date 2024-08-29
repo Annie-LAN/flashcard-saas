@@ -16,6 +16,9 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+import { doc, collection, getDoc, writeBatch } from "firebase/firestore";
+import db from "../../firebase";
+import { useUser } from "@clerk/nextjs";
 
 export default function Generate() {
   const [text, setText] = useState("");
@@ -27,32 +30,30 @@ export default function Generate() {
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
 
+  const { user } = useUser(); // Fetch user information using Clerk
+
   const handleSubmit = async () => {
-    const handleSubmit = async () => {
-      if (!text.trim()) {
-        alert("Please enter some text to generate flashcards.");
-        return;
+    if (!text.trim()) {
+      alert("Please enter some text to generate flashcards.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        body: text,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to generate flashcards");
       }
 
-      try {
-        const response = await fetch("/api/generate", {
-          method: "POST",
-          body: text,
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to generate flashcards");
-        }
-
-        const data = await response.json();
-        setFlashcards(data);
-      } catch (error) {
-        console.error("Error generating flashcards:", error);
-        alert(
-          "An error occurred while generating flashcards. Please try again."
-        );
-      }
-    };
+      const data = await response.json();
+      setFlashcards(data);
+    } catch (error) {
+      console.error("Error generating flashcards:", error);
+      alert("An error occurred while generating flashcards. Please try again.");
+    }
   };
 
   const saveFlashcards = async () => {
@@ -60,6 +61,14 @@ export default function Generate() {
       alert("Please enter a name for your flashcard set.");
       return;
     }
+
+    if (!user) {
+      console.error("User is not authenticated");
+      alert("User is not authenticated.");
+      return;
+    }
+
+    console.log("User object:", user); // Add this line to inspect the user object
 
     try {
       const userDocRef = doc(collection(db, "users"), user.id);
