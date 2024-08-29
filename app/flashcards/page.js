@@ -1,19 +1,18 @@
+"use client";
+
+import { useUser } from "@clerk/nextjs";
 import {
   Container,
-  TextField,
-  Button,
   Typography,
-  Box,
   Grid,
   Card,
   CardContent,
   CardActionArea,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
 } from "@mui/material";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { doc, collection, getDoc, setDoc } from "firebase/firestore";
+import db from "../../firebase";
 
 export default function Flashcard() {
   const { isLoaded, isSignedIn, user } = useUser();
