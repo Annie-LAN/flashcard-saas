@@ -7,6 +7,7 @@ import {
   CardContent,
   CardActionArea,
 } from "@mui/material";
+import { db } from "../../firebase";
 
 export default function Flashcard() {
   const { isLoaded, isSignedIn, user } = useUser();

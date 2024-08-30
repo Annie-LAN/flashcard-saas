@@ -17,8 +17,8 @@ import {
   DialogActions,
 } from "@mui/material";
 import { doc, collection, getDoc, writeBatch } from "firebase/firestore";
-import db from "../../firebase";
-import { useUser } from "@clerk/nextjs";
+import { db, auth } from "../../firebase";
+// import { useUser } from "@clerk/nextjs";
 
 export default function Generate() {
   const [text, setText] = useState("");
@@ -30,7 +30,8 @@ export default function Generate() {
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
 
-  const { user } = useUser(); // Fetch user information using Clerk
+  // const { user } = useUser(); // Fetch user information using Clerk
+  const user = auth.currentUser;
 
   const handleSubmit = async () => {
     if (!text.trim()) {
@@ -56,6 +57,7 @@ export default function Generate() {
     }
   };
 
+  // only save flashcard set name
   const saveFlashcards = async () => {
     if (!setName.trim()) {
       alert("Please enter a name for your flashcard set.");
@@ -71,7 +73,7 @@ export default function Generate() {
     console.log("User object:", user); // Add this line to inspect the user object
 
     try {
-      const userDocRef = doc(collection(db, "users"), user.id);
+      const userDocRef = doc(collection(db, "users"), user.uid);
       const userDocSnap = await getDoc(userDocRef);
 
       const batch = writeBatch(db);

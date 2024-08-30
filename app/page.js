@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography, Button, Box, Grid } from "@mui/material";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+// import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import getStripe from "./utils/get-stripe";
+import SignIn from "./components/signIn";
 
 export default function Home() {
   // TODO: call handleSubmit
@@ -28,7 +29,7 @@ export default function Home() {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Flashcard SaaS
           </Typography>
-          <SignedOut>
+          {/* <SignedOut>
             <Button color="inherit" href="/sign-in">
               Login
             </Button>
@@ -38,7 +39,8 @@ export default function Home() {
           </SignedOut>
           <SignedIn>
             <UserButton />
-          </SignedIn>
+          </SignedIn> */}
+          <SignIn />
         </Toolbar>
       </AppBar>
 
@@ -57,9 +59,10 @@ export default function Home() {
         >
           Get Started
         </Button>
-        <Button variant="outlined" color="primary" sx={{ mt: 2 }}>
+        {/* learn more */}
+        {/* <Button variant="outlined" color="primary" sx={{ mt: 2 }}>
           Learn More
-        </Button>
+        </Button> */}
       </Box>
       <Box sx={{ my: 6 }}>
         <Typography variant="h4" component="h2" gutterBottom>
