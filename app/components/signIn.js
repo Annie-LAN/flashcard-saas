@@ -16,7 +16,8 @@ export default function SignIn() {
 
         // The signed-in user info.
         const user = result.user;
-        router.push("/"); // Redirect back to the home page
+        router.push("/generate"); // Redirect to a page
+        console.log("Annie: signed in!");
       })
       .catch((error) => {
         // Handle Errors here.
@@ -37,7 +38,7 @@ export default function SignIn() {
 
   return (
     <Button variant="contained" onClick={handleSignIn}>
-      Sign In
+      Sign In With Google
     </Button>
   );
 }

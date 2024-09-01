@@ -15,10 +15,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  AppBar,
+  Toolbar,
 } from "@mui/material";
 import { doc, collection, getDoc, writeBatch } from "firebase/firestore";
 import { db, auth } from "../../firebase";
-// import { useUser } from "@clerk/nextjs";
+import SignOut from "../components/signOut";
 
 export default function Generate() {
   const [text, setText] = useState("");
@@ -30,7 +32,6 @@ export default function Generate() {
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
 
-  // const { user } = useUser(); // Fetch user information using Clerk
   const user = auth.currentUser;
 
   const handleSubmit = async () => {
@@ -104,89 +105,102 @@ export default function Generate() {
   };
 
   return (
-    <Container maxWidth="md">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Generate Flashcards
-        </Typography>
-        <TextField
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          label="Enter text"
-          fullWidth
-          multiline
-          rows={4}
-          variant="outlined"
-          sx={{ mb: 2 }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          fullWidth
-        >
-          Generate Flashcards
-        </Button>
-      </Box>
-
-      {flashcards.length > 0 && (
-        <Box sx={{ mt: 4 }}>
-          <Typography variant="h5" component="h2" gutterBottom>
-            Generated Flashcards
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            Flashcard SaaS
           </Typography>
-          <Grid container spacing={2}>
-            {flashcards.map((flashcard, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6">Front:</Typography>
-                    <Typography>{flashcard.front}</Typography>
-                    <Typography variant="h6" sx={{ mt: 2 }}>
-                      Back:
-                    </Typography>
-                    <Typography>{flashcard.back}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      )}
-      {flashcards.length > 0 && (
-        <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+          <SignOut />
+          <Button variant="contained" color="primary" href="/flashcards">
+            My Flashcards
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="md">
+        <Box sx={{ my: 4 }}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Generate Flashcards
+          </Typography>
+          <TextField
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            label="Enter text"
+            fullWidth
+            multiline
+            rows={4}
+            variant="outlined"
+            sx={{ mb: 2 }}
+          />
           <Button
             variant="contained"
             color="primary"
-            onClick={handleOpenDialog}
+            onClick={handleSubmit}
+            fullWidth
           >
-            Save Flashcards
+            Generate Flashcards
           </Button>
         </Box>
-      )}
-      {/* Dialog */}
-      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-        <DialogTitle>Save Flashcard Set</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Please enter a name for your flashcard set.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Set Name"
-            type="text"
-            fullWidth
-            value={setName}
-            onChange={(e) => setSetName(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button onClick={saveFlashcards} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Container>
+
+        {flashcards.length > 0 && (
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="h5" component="h2" gutterBottom>
+              Generated Flashcards
+            </Typography>
+            <Grid container spacing={2}>
+              {flashcards.map((flashcard, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h6">Front:</Typography>
+                      <Typography>{flashcard.front}</Typography>
+                      <Typography variant="h6" sx={{ mt: 2 }}>
+                        Back:
+                      </Typography>
+                      <Typography>{flashcard.back}</Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        )}
+        {flashcards.length > 0 && (
+          <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOpenDialog}
+            >
+              Save Flashcards
+            </Button>
+          </Box>
+        )}
+        {/* Dialog */}
+        <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+          <DialogTitle>Save Flashcard Set</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a name for your flashcard set.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Set Name"
+              type="text"
+              fullWidth
+              value={setName}
+              onChange={(e) => setSetName(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog}>Cancel</Button>
+            <Button onClick={saveFlashcards} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Container>
+    </>
   );
 }

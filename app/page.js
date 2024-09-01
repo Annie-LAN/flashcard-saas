@@ -40,7 +40,14 @@ export default function Home() {
           <SignedIn>
             <UserButton />
           </SignedIn> */}
-          <SignIn />
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2, mr: 2 }}
+            href="/generate"
+          >
+            sth
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -51,7 +58,8 @@ export default function Home() {
         <Typography variant="h5" component="h2" gutterBottom>
           The easiest way to create flashcards from your text.
         </Typography>
-        <Button
+        <SignIn />
+        {/* <Button
           variant="contained"
           color="primary"
           sx={{ mt: 2, mr: 2 }}
@@ -59,27 +67,36 @@ export default function Home() {
         >
           Get Started
         </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2, mr: 2 }}
+          href="/flashcards"
+        >
+          Check out flashcards
+        </Button> */}
         {/* learn more */}
         {/* <Button variant="outlined" color="primary" sx={{ mt: 2 }}>
           Learn More
         </Button> */}
       </Box>
-      <Box sx={{ my: 6 }}>
+
+      {/* <Box sx={{ my: 6 }}>
         <Typography variant="h4" component="h2" gutterBottom>
           Features
         </Typography>
-        <Grid container spacing={4}>
-          {/* Feature items */}
-        </Grid>
+        <Grid container spacing={4}> */}
+      {/* Feature items */}
+      {/* </Grid>
       </Box>
       <Box sx={{ my: 6, textAlign: "center" }}>
         <Typography variant="h4" component="h2" gutterBottom>
           Pricing
         </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          {/* Pricing plans */}
-        </Grid>
-      </Box>
+        <Grid container spacing={4} justifyContent="center"> */}
+      {/* Pricing plans */}
+      {/* </Grid>
+      </Box> */}
     </>
   );
 }
