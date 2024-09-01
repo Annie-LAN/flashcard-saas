@@ -76,7 +76,7 @@ export default function Generate() {
     }
 
     try {
-      const userDocRef = doc(collection(db, "users"), user.uid);
+      const userDocRef = doc(db, "users", user.uid);
       const setDocRef = doc(collection(userDocRef, "flashcardSets"), setName);
 
       await setDoc(setDocRef, { flashcards });

@@ -13,35 +13,46 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { doc, collection, getDoc, setDoc } from "firebase/firestore";
+import { doc, collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SignOut from "../components/signOut";
 
 export default function Flashcards() {
   const [user, loading, error] = useAuthState(auth);
-  const [flashcards, setFlashcards] = useState([]);
+  const [flashcardSets, setFlashcardSets] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     if (!loading && user) {
-      const getFlashcards = async () => {
-        const docRef = doc(collection(db, "users"), user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const collections = docSnap.data().flashcards || [];
-          setFlashcards(collections);
-        } else {
-          await setDoc(docRef, { flashcards: [] });
+      const getFlashcardSets = async () => {
+        try {
+          const userDocRef = doc(db, "users", user.uid);
+          const flashcardSetsRef = collection(userDocRef, "flashcardSets");
+          const querySnapshot = await getDocs(flashcardSetsRef);
+
+          if (!querySnapshot.empty) {
+            const sets = querySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            console.log("Flashcard sets data:", sets); // Log flashcard sets data
+            setFlashcardSets(sets);
+          } else {
+            console.log("No flashcard sets found!");
+          }
+        } catch (error) {
+          console.error("Error fetching flashcard sets:", error);
         }
       };
-      getFlashcards();
+
+      getFlashcardSets();
     }
   }, [user, loading]);
 
-  const handleCardClick = (id) => {
+  const handleCardClick = (setId) => {
     if (router.isReady) {
-      router.push(`/flashcard?id=${id}`);
+      router.push(`/flashcardSet?id=${encodeURIComponent(setId)}`);
     }
   };
 
@@ -64,22 +75,28 @@ export default function Flashcards() {
 
       <Container maxWidth="md">
         <Typography variant="h4" component="div" sx={{ mt: 4, mb: 4 }}>
-          Your Flashcards
+          My Flashcard Sets
         </Typography>
         <Grid container spacing={3}>
-          {flashcards.map((flashcard, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card>
-                <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
-                  <CardContent>
-                    <Typography variant="h5" component="div">
-                      {flashcard.name}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          ))}
+          {flashcardSets.length > 0 ? (
+            flashcardSets.map((flashcardSet, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardActionArea
+                    onClick={() => handleCardClick(flashcardSet.id)}
+                  >
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        {flashcardSet.id}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <Typography variant="body1">No flashcard sets found.</Typography>
+          )}
         </Grid>
       </Container>
     </>
