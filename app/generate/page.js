@@ -18,14 +18,19 @@ import {
   AppBar,
   Toolbar,
 } from "@mui/material";
-import { doc, collection, getDoc, writeBatch } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  getDoc,
+  writeBatch,
+  setDoc,
+} from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import SignOut from "../components/signOut";
 
 export default function Generate() {
   const [text, setText] = useState("");
   const [flashcards, setFlashcards] = useState([]);
-
   const [setName, setSetName] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -58,7 +63,6 @@ export default function Generate() {
     }
   };
 
-  // only save flashcard set name
   const saveFlashcards = async () => {
     if (!setName.trim()) {
       alert("Please enter a name for your flashcard set.");
@@ -71,29 +75,11 @@ export default function Generate() {
       return;
     }
 
-    console.log("User object:", user); // Add this line to inspect the user object
-
     try {
       const userDocRef = doc(collection(db, "users"), user.uid);
-      const userDocSnap = await getDoc(userDocRef);
-
-      const batch = writeBatch(db);
-
-      if (userDocSnap.exists()) {
-        const userData = userDocSnap.data();
-        const updatedSets = [
-          ...(userData.flashcardSets || []),
-          { name: setName },
-        ];
-        batch.update(userDocRef, { flashcardSets: updatedSets });
-      } else {
-        batch.set(userDocRef, { flashcardSets: [{ name: setName }] });
-      }
-
       const setDocRef = doc(collection(userDocRef, "flashcardSets"), setName);
-      batch.set(setDocRef, { flashcards });
 
-      await batch.commit();
+      await setDoc(setDocRef, { flashcards });
 
       alert("Flashcards saved successfully!");
       handleCloseDialog();
