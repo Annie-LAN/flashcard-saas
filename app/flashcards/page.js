@@ -9,7 +9,7 @@ import {
   CardActionArea,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { doc, collection, getDoc, setDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,8 +20,7 @@ export default function Flashcards() {
   const router = useRouter();
 
   useEffect(() => {
-    // Ensure this code runs only on the client side
-    if (typeof window !== "undefined" && router.isReady && !loading && user) {
+    if (!loading && user) {
       const getFlashcards = async () => {
         const docRef = doc(collection(db, "users"), user.uid);
         const docSnap = await getDoc(docRef);
@@ -34,7 +33,7 @@ export default function Flashcards() {
       };
       getFlashcards();
     }
-  }, [user, loading, router.isReady]);
+  }, [user, loading]);
 
   const handleCardClick = (id) => {
     if (router.isReady) {
@@ -44,11 +43,13 @@ export default function Flashcards() {
 
   if (loading) return <div>Loading...</div>; // Optional loading state
   if (error) return <div>Error: {error.message}</div>; // Optional error state
-  if (!user) return <div>Please sign in</div>; // Handle unauthenticated state
 
   return (
     <Container maxWidth="md">
-      <Grid container spacing={3} sx={{ mt: 4 }}>
+      <Typography variant="h4" component="div" sx={{ mt: 4, mb: 4 }}>
+        Your Flashcards
+      </Typography>
+      <Grid container spacing={3}>
         {flashcards.map((flashcard, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card>
