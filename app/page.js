@@ -4,25 +4,11 @@ import { AppBar, Toolbar, Typography, Box, Container } from "@mui/material";
 import SignIn from "./components/signIn";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// Define your custom theme
 const theme = createTheme({
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
     h1: {
       fontWeight: 700,
       fontSize: "2.5rem",
-    },
-    h5: {
-      fontWeight: 400,
-      fontSize: "1.25rem",
-    },
-  },
-  palette: {
-    primary: {
-      main: "#1976d2",
-    },
-    secondary: {
-      main: "#dc004e",
     },
   },
 });
