@@ -63,7 +63,7 @@ export default function Flashcards() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
+            SmartFlash
           </Typography>
 
           <Button variant="contained" color="primary" href="/generate">

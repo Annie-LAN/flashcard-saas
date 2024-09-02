@@ -18,13 +18,7 @@ import {
   AppBar,
   Toolbar,
 } from "@mui/material";
-import {
-  doc,
-  collection,
-  getDoc,
-  writeBatch,
-  setDoc,
-} from "firebase/firestore";
+import { doc, collection, setDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import SignOut from "../components/signOut";
 import { v4 as uuidv4 } from "uuid";
@@ -100,7 +94,7 @@ export default function Generate() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
+            SmartFlash
           </Typography>
           <Button variant="contained" color="primary" href="/flashcards">
             My Flashcards

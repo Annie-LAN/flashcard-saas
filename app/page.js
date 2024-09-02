@@ -1,5 +1,6 @@
+"use client";
+
 import { AppBar, Toolbar, Typography, Button, Box, Grid } from "@mui/material";
-// import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import getStripe from "./utils/get-stripe";
 import SignIn from "./components/signIn";
 
@@ -27,26 +28,22 @@ export default function Home() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flashcard SaaS
+            SmartFlash
           </Typography>
           {/* <SignIn /> */}
-          {/* <Button
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2, mr: 2 }}
-            href="/generate"
-          >
-            sth
+          {/* <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Subscribe
           </Button> */}
         </Toolbar>
       </AppBar>
 
       <Box sx={{ textAlign: "center", my: 4 }}>
         <Typography variant="h2" component="h1" gutterBottom>
-          Welcome to Flashcard SaaS
+          Need a better way to memorize?
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom>
-          The easiest way to create flashcards from your text.
+          Enhance your learning with AI-powered flashcards generated from your
+          own text for faster retention and deeper understanding.
         </Typography>
         <SignIn />
         {/* <Button
