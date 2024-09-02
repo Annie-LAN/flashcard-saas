@@ -11,7 +11,6 @@ export default function Home() {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             SmartFlash
           </Typography>
-          {/* <SignIn /> */}
         </Toolbar>
       </AppBar>
 
@@ -24,44 +23,7 @@ export default function Home() {
           own text for faster retention and deeper understanding.
         </Typography>
         <SignIn />
-        {/* <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 2, mr: 2 }}
-          href="/generate"
-        >
-          Get Started
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 2, mr: 2 }}
-          href="/flashcards"
-        >
-          Check out flashcards
-        </Button> */}
-        {/* learn more */}
-        {/* <Button variant="outlined" color="primary" sx={{ mt: 2 }}>
-          Learn More
-        </Button> */}
       </Box>
-
-      {/* <Box sx={{ my: 6 }}>
-        <Typography variant="h4" component="h2" gutterBottom>
-          Features
-        </Typography>
-        <Grid container spacing={4}> */}
-      {/* Feature items */}
-      {/* </Grid>
-      </Box>
-      <Box sx={{ my: 6, textAlign: "center" }}>
-        <Typography variant="h4" component="h2" gutterBottom>
-          Pricing
-        </Typography>
-        <Grid container spacing={4} justifyContent="center"> */}
-      {/* Pricing plans */}
-      {/* </Grid>
-      </Box> */}
     </>
   );
 }
