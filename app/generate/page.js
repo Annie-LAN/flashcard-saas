@@ -97,16 +97,11 @@ export default function Generate() {
           <Typography variant="h5" style={{ flexGrow: 1 }}>
             SmartFlash
           </Typography>
-          <Button
-            variant="text"
-            color="white"
-            href="/flashcards"
-            sx={{ mx: 1 }}
-          >
+          <Button variant="text" color="white" href="/flashcards">
             Flashcards
           </Button>
-          <SubscribeButton sx={{ mx: 1 }} />
-          <SignOut sx={{ mx: 1 }} />
+          <SubscribeButton />
+          <SignOut />
         </Toolbar>
       </AppBar>
       <Container maxWidth="md">
@@ -158,11 +153,12 @@ export default function Generate() {
           </Box>
         )}
         {flashcards.length > 0 && (
-          <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+          <Box sx={{ my: 4, display: "flex", justifyContent: "center" }}>
             <Button
               variant="contained"
               color="primary"
               onClick={handleOpenDialog}
+              fullWidth
             >
               Save Flashcards
             </Button>

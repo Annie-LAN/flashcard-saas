@@ -73,14 +73,14 @@ export default function Flashcard({ params }) {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Typography variant="h5" style={{ flexGrow: 1 }}>
             SmartFlash
           </Typography>
-          <Button variant="contained" color="primary" href="/flashcards">
-            My Flashcards
+          <Button variant="text" color="white" href="/flashcards">
+            Flashcards
           </Button>
-          <Button variant="contained" color="primary" href="/generate">
-            Generate Flashcard
+          <Button variant="text" color="white" href="/generate">
+            Generate
           </Button>
           <SubscribeButton />
           <SignOut />
@@ -91,14 +91,14 @@ export default function Flashcard({ params }) {
         <Typography variant="h4" component="div" sx={{ mt: 4 }}>
           {flashcardName}
         </Typography>
-        <Grid container spacing={3} sx={{ mt: 4 }}>
+        <Grid container spacing={3} sx={{ mt: 1, mb: 4 }}>
           {flashcards.length > 0 ? (
             flashcards.map((flashcard, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card>
                   <CardActionArea onClick={() => handleCardClick(index)}>
                     <CardContent>
-                      <Typography variant="h5" component="div">
+                      <Typography variant="h6" component="div">
                         {flipped[index] ? flashcard.back : flashcard.front}
                       </Typography>
                     </CardContent>

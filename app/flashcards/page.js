@@ -63,12 +63,12 @@ export default function Flashcards() {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Typography variant="h5" style={{ flexGrow: 1 }}>
             SmartFlash
           </Typography>
 
-          <Button variant="contained" color="primary" href="/generate">
-            Generate Flashcard
+          <Button variant="text" color="white" href="/generate">
+            Generate
           </Button>
           <SubscribeButton />
           <SignOut />
@@ -88,7 +88,7 @@ export default function Flashcards() {
                     onClick={() => handleCardClick(flashcardSet.id)}
                   >
                     <CardContent>
-                      <Typography variant="h5" component="div">
+                      <Typography variant="h6" component="div">
                         {flashcardSet.name}
                       </Typography>
                     </CardContent>
