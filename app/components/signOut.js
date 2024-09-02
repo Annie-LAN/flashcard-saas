@@ -20,7 +20,7 @@ export default function SignOut() {
   };
 
   return (
-    <Button variant="contained" onClick={handleSignOut}>
+    <Button variant="text" onClick={handleSignOut} color="white">
       Sign Out
     </Button>
   );

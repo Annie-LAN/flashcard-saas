@@ -21,7 +21,7 @@ export default function SubscribeButton() {
     }
   };
   return (
-    <Button variant="contained" color="primary" onClick={handleSubmit}>
+    <Button variant="text" color="white" onClick={handleSubmit}>
       Subscribe
     </Button>
   );

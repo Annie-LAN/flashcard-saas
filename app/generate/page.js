@@ -94,14 +94,19 @@ export default function Generate() {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Typography variant="h5" style={{ flexGrow: 1 }}>
             SmartFlash
           </Typography>
-          <Button variant="contained" color="primary" href="/flashcards">
-            My Flashcards
+          <Button
+            variant="text"
+            color="white"
+            href="/flashcards"
+            sx={{ mx: 1 }}
+          >
+            Flashcards
           </Button>
-          <SubscribeButton />
-          <SignOut />
+          <SubscribeButton sx={{ mx: 1 }} />
+          <SignOut sx={{ mx: 1 }} />
         </Toolbar>
       </AppBar>
       <Container maxWidth="md">
