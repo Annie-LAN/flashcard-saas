@@ -1,28 +1,9 @@
 "use client";
 
 import { AppBar, Toolbar, Typography, Button, Box, Grid } from "@mui/material";
-import getStripe from "./utils/get-stripe";
 import SignIn from "./components/signIn";
 
 export default function Home() {
-  // TODO: call handleSubmit
-  const handleSubmit = async () => {
-    const checkoutSession = await fetch("/api/checkout_sessions", {
-      method: "POST",
-      headers: { origin: "http://localhost:3000" },
-    });
-    const checkoutSessionJson = await checkoutSession.json();
-
-    const stripe = await getStripe();
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: checkoutSessionJson.id,
-    });
-
-    if (error) {
-      console.warn(error.message);
-    }
-  };
-
   return (
     <>
       <AppBar position="static">
@@ -31,9 +12,6 @@ export default function Home() {
             SmartFlash
           </Typography>
           {/* <SignIn /> */}
-          {/* <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Subscribe
-          </Button> */}
         </Toolbar>
       </AppBar>
 

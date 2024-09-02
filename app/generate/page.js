@@ -20,8 +20,9 @@ import {
 } from "@mui/material";
 import { doc, collection, setDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase";
-import SignOut from "../components/signOut";
 import { v4 as uuidv4 } from "uuid";
+import SignOut from "../components/signOut";
+import SubscribeButton from "../components/subscribeButton";
 
 export default function Generate() {
   const [text, setText] = useState("");
@@ -99,6 +100,7 @@ export default function Generate() {
           <Button variant="contained" color="primary" href="/flashcards">
             My Flashcards
           </Button>
+          <SubscribeButton />
           <SignOut />
         </Toolbar>
       </AppBar>

@@ -1,5 +1,6 @@
-import { useRouter } from "next/router";
-import { useSearchParams } from "next/navigation";
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Container, Typography, Box, CircularProgress } from "@mui/material";
 

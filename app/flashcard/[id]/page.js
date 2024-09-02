@@ -16,6 +16,7 @@ import { db, auth } from "../../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SignOut from "../../components/signOut";
+import SubscribeButton from "@/app/components/subscribeButton";
 
 export default function Flashcard({ params }) {
   const { id } = params;
@@ -81,6 +82,7 @@ export default function Flashcard({ params }) {
           <Button variant="contained" color="primary" href="/generate">
             Generate Flashcard
           </Button>
+          <SubscribeButton />
           <SignOut />
         </Toolbar>
       </AppBar>
