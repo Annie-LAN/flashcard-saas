@@ -38,13 +38,7 @@ export default function Flashcard({ params }) {
           const data = docSnap.data();
           // get name
           const flashcardSetName = data.name || "";
-          // capitalize first letter of each word in name
-          const words = flashcardSetName.split(" ");
-          for (let i = 0; i < words.length; i++) {
-            words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-          }
-          words.join(" ");
-          setFlashcardName(words);
+          setFlashcardName(flashcardSetName);
           // get flashcards: back and front
           const flashcardsArray = data.flashcards || [];
           setFlashcards(flashcardsArray);
