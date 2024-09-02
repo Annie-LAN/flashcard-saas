@@ -88,7 +88,7 @@ export default function Flashcards() {
                   >
                     <CardContent>
                       <Typography variant="h5" component="div">
-                        {flashcardSet.id}
+                        {flashcardSet.name}
                       </Typography>
                     </CardContent>
                   </CardActionArea>

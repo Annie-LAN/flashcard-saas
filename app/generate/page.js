@@ -27,6 +27,7 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import SignOut from "../components/signOut";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Generate() {
   const [text, setText] = useState("");
@@ -77,9 +78,13 @@ export default function Generate() {
 
     try {
       const userDocRef = doc(db, "users", user.uid);
-      const setDocRef = doc(collection(userDocRef, "flashcardSets"), setName);
+      const uniqueId = uuidv4(); // Generate a unique ID for the flashcard set
+      const setDocRef = doc(collection(userDocRef, "flashcardSets"), uniqueId);
 
-      await setDoc(setDocRef, { flashcards });
+      await setDoc(setDocRef, {
+        name: setName,
+        flashcards: flashcards,
+      });
 
       alert("Flashcards saved successfully!");
       handleCloseDialog();
