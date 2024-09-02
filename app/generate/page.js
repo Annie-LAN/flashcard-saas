@@ -102,10 +102,10 @@ export default function Generate() {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Flashcard SaaS
           </Typography>
-          <SignOut />
           <Button variant="contained" color="primary" href="/flashcards">
             My Flashcards
           </Button>
+          <SignOut />
         </Toolbar>
       </AppBar>
       <Container maxWidth="md">

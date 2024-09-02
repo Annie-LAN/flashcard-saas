@@ -29,25 +29,15 @@ export default function Home() {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Flashcard SaaS
           </Typography>
-          {/* <SignedOut>
-            <Button color="inherit" href="/sign-in">
-              Login
-            </Button>
-            <Button color="inherit" href="/sign-up">
-              Sign Up
-            </Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn> */}
-          <Button
+          {/* <SignIn /> */}
+          {/* <Button
             variant="contained"
             color="primary"
             sx={{ mt: 2, mr: 2 }}
             href="/generate"
           >
             sth
-          </Button>
+          </Button> */}
         </Toolbar>
       </AppBar>
 

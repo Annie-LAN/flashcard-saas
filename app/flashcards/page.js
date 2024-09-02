@@ -65,10 +65,11 @@ export default function Flashcards() {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Flashcard SaaS
           </Typography>
-          <SignOut />
+
           <Button variant="contained" color="primary" href="/generate">
             Generate Flashcard
           </Button>
+          <SignOut />
         </Toolbar>
       </AppBar>
 
