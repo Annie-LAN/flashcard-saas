@@ -29,6 +29,7 @@ export default function Generate() {
   const [flashcards, setFlashcards] = useState([]);
   const [setName, setSetName] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
@@ -40,6 +41,8 @@ export default function Generate() {
       alert("Please enter some text to generate flashcards.");
       return;
     }
+
+    setLoading(true); // Start loading
 
     try {
       const response = await fetch("/api/generate", {
@@ -56,6 +59,8 @@ export default function Generate() {
     } catch (error) {
       console.error("Error generating flashcards:", error);
       alert("An error occurred while generating flashcards. Please try again.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -124,8 +129,9 @@ export default function Generate() {
             color="primary"
             onClick={handleSubmit}
             fullWidth
+            disabled={loading} // Disable button when loading
           >
-            Generate Flashcards
+            {loading ? "Loading..." : "Generate Flashcards"}
           </Button>
         </Box>
 
