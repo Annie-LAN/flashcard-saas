@@ -52,9 +52,7 @@ export default function Flashcards() {
 
   const handleCardClick = (setId) => {
     console.log("Card clicked with ID:", setId);
-    if (router.isReady) {
-      router.push(`/flashcard/${encodeURIComponent(setId)}`);
-    }
+    router.push(`/flashcard/${encodeURIComponent(setId)}`);
   };
 
   if (loading) return <div>Loading...</div>; // Optional loading state
