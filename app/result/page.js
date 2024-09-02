@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Container, Typography, Box, CircularProgress } from "@mui/material";
 
-const ResultPage = () => {
+const ResultContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const session_id = searchParams.get("session_id");
@@ -79,6 +79,23 @@ const ResultPage = () => {
         </>
       )}
     </Container>
+  );
+};
+
+const ResultPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <Container maxWidth="sm" sx={{ textAlign: "center", mt: 4 }}>
+          <CircularProgress />
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            Loading...
+          </Typography>
+        </Container>
+      }
+    >
+      <ResultContent />
+    </Suspense>
   );
 };
 
