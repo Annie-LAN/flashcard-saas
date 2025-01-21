@@ -14,7 +14,7 @@
     "@mui/material": "^6.0.1",
     "@stripe/stripe-js": "^4.4.0",
     "firebase": "^10.13.0",
-    "next": "^14.2.10",
+    "next": "^14.2.21",
     "openai": "^4.56.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
